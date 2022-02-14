@@ -5,7 +5,7 @@ from .models import Mobile, Rating
 class MobileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mobile
-        fields = "__all__"
+        fields = ['id', 'company', 'name', 'price', 'no_of_ratings', 'avg_ratings']
 
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:

@@ -10,6 +10,16 @@ class Mobile(models.Model):
     company = models.CharField(max_length=10)
     price = models.IntegerField(validators=[MinValueValidator(0)])
 
+    def no_of_ratings(self):
+        ratings = Rating.objects.filter(mobile=self).aggregate(models.Count('stars'))
+        return ratings["stars__count"]
+
+    def avg_ratings(self):
+        ratings = Rating.objects.filter(mobile=self).aggregate(models.Avg('stars'))
+        if self.no_of_ratings() == 0:
+            return 0
+        return ratings["stars__avg"]
+
     def __str__(self):
         return f"{self.company} {self.name}"
 
