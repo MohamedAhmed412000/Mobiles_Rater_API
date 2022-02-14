@@ -1,0 +1,1 @@
+web: gunicorn mobileRater.wsgi --log-file -
